@@ -48,5 +48,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>MaterialIcons.ttf</string>
+	</array>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Este aplicativo usa reconhecimento de fala para ler textos em voz alta.</string>
 </dict>
 </plist>
