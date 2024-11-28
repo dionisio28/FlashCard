@@ -3,8 +3,8 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Tts from 'react-native-tts';
-import {scale} from '../../../utils/platformUtils';
-import {color} from '../../../styles';
+import {scale} from '../../utils/platformUtils';
+import {color} from '../../styles';
 
 const speak = (text: string) => {
   Tts.speak(text);

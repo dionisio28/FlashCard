@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: scale(8),
+    padding: scale(10),
     backgroundColor: color.primaryBlue,
     paddingTop: STATUSBAR_HEIGHT,
   },

@@ -31,3 +31,5 @@ export const isPortrait = () => getWindowHeight() > getWindowWidth();
 
 export const isTablet = PlatformConstants.interfaceIdiom === 'pad';
 
+
+

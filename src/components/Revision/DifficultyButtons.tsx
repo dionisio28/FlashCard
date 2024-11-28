@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {scale} from '../../../utils/platformUtils';
+import {scale} from '../../utils/platformUtils';
 
 interface DifficultyButtons {
   handlePressDificultyLevel: (difficulty: number) => void;
