@@ -4,6 +4,8 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import Header from '../components/shared/Header';
 import {getWindowWidth, scale} from '../utils/platformUtils';
 import CardItem from '../components/Home/CardItem';
+import {homeStrings} from '../locales';
+import {color} from '../styles';
 
 const width = getWindowWidth();
 
@@ -40,9 +42,10 @@ const arrayOftest: CardData[] = [
 const Home: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Header title={'Flashcards'} menuButton />
+      <Header title={homeStrings.flashcard} />
       <FlatList
         data={arrayOftest}
+        style={styles.flatlist}
         keyExtractor={item => String(item.id)}
         renderItem={({item}) => <CardItem cardData={item} />}
       />
@@ -55,21 +58,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: width,
     alignItems: 'center',
+    backgroundColor: color.background,
   },
-  card: {
-    width: width * 0.9,
-    padding: scale(16),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  title: {
-    fontSize: scale(14),
+  flatlist: {
+    padding: 16,
   },
 });
 

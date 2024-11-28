@@ -1,7 +1,5 @@
 import {homeStrings} from './homeStrings';
 
-// type appLanguageCode = 'pt' | 'en' | 'es';
-
 const setAppLanguage = (languageCode: string) => {
 
   console.log('languageCode', languageCode);

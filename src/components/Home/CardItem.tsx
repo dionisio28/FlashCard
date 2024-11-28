@@ -11,15 +11,23 @@ interface CardItemProps {
 
 const CardItem = ({cardData}: CardItemProps) => {
   return (
-    <View style={styles.container}>
-      <View>
-        <Text>{cardData.title}</Text>
-        <Text>{cardData.description}</Text>
+    <TouchableOpacity activeOpacity={0.5} style={styles.container}>
+      <View style={styles.textColumn}>
+        <Text style={styles.title}>{cardData.title}</Text>
+        {cardData.description && (
+          <Text numberOfLines={1} style={styles.description}>
+            {cardData.description}
+          </Text>
+        )}
       </View>
-      <TouchableOpacity>
-        <Icon name={'edit'} color={color.darkGray} size={scale(24)} />
-      </TouchableOpacity>
-    </View>
+      <View style={styles.icon}>
+        <Icon
+          name={'arrow-forward-ios'}
+          color={color.lightGray}
+          size={scale(22)}
+        />
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -28,7 +36,27 @@ export default CardItem;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
+    paddingBottom: 16,
+    marginVertical: 6,
+  },
+  title: {
+    fontSize: scale(16),
+    color: color.lightBlack,
+  },
+  description: {
+    fontSize: scale(12),
+    color: color.darkGray,
+  },
+  textColumn: {
+    width: '80%',
+  },
+  icon: {
+    width: '15%',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
 });
