@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 
 import Header from '../components/shared/Header';
-import {getWindowWidth, scale} from '../utils/platformUtils';
+import {getWindowWidth} from '../utils/platformUtils';
 import CardItem from '../components/Home/CardItem';
 import {homeStrings} from '../locales';
 import {color} from '../styles';
+import Button from '../components/shared/Button';
 
 const width = getWindowWidth();
 
@@ -40,6 +41,7 @@ const arrayOftest: CardData[] = [
 ];
 
 const Home: React.FC = () => {
+  const onHandleCreateFashcard = useCallback(() => {}, []);
   return (
     <View style={styles.container}>
       <Header title={homeStrings.flashcard} />
@@ -49,6 +51,7 @@ const Home: React.FC = () => {
         keyExtractor={item => String(item.id)}
         renderItem={({item}) => <CardItem cardData={item} />}
       />
+      <Button onPress={onHandleCreateFashcard} />
     </View>
   );
 };

@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import { scale } from './utils/platformUtils';
 
 export const color = {
-  primaryBlue: '#2088e6',
+  primaryBlue: '#42a5f6',
   backgroundGreen: '#009688',
   white: '#FFFFFF',
   background: '#FFFFFF',
