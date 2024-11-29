@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 
 import Header from '../components/shared/Header';
@@ -7,51 +7,70 @@ import CardItem from '../components/Home/CardItem';
 import {homeStrings} from '../locales';
 import {color} from '../styles';
 import Button from '../components/shared/Button';
+import CreateFlashcardModal from '../components/Home/CreateFlashcardModal';
+import {Flashcard} from '../database/types';
+import {
+  addFlashcard,
+  getAllFlashcards,
+} from '../database/services/flashcardService';
+import EmptyFlashcardMessage from '../components/Home/EmptyFlashcardMessage';
 
 const width = getWindowWidth();
 
-export interface CardData {
-  id: number;
-  title: string;
-  description: string;
-}
-
-const arrayOftest: CardData[] = [
-  {
-    id: 1,
-    title: 'Ingles test',
-    description: 'pequena descrição para o card',
-  },
-  {
-    id: 2,
-    title: 'Portugues test',
-    description: 'pequena descrição para o card de portugues',
-  },
-  {
-    id: 3,
-    title: 'Esp test',
-    description: '',
-  },
-  {
-    id: 4,
-    title: 'Italiano',
-    description:
-      'Agora uma grande descrição para o card de italiano e teste ++++++++++ com muitos caracters )))) 1392CMIM ISD ADSOIJKDO ASKDOSAK OD asjdisajdi  jiasjdisaj isajdi asjid jasijs',
-  },
-];
-
 const Home: React.FC = () => {
-  const onHandleCreateFashcard = useCallback(() => {}, []);
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [flashCards, setFlashCards] = useState<Flashcard[]>([]);
+
+  console.log('flashCards', flashCards);
+
+  const fetchFlashcards = useCallback(() => {
+    const fetchedFlashcards = getAllFlashcards();
+    setFlashCards(fetchedFlashcards);
+  }, []);
+
+  useEffect(() => {
+    fetchFlashcards();
+  }, [fetchFlashcards]);
+
+  const handleCreateFlashcard = useCallback(
+    (title: string, description: string) => {
+      addFlashcard(title, description);
+      fetchFlashcards();
+      setModalVisibility(false);
+    },
+    [fetchFlashcards],
+  );
+
+  const renderItem = useCallback(({item}: {item: Flashcard}) => {
+    return <CardItem cardData={item} />;
+  }, []);
+
+  const keyExtractor = useCallback((item: Flashcard) => String(item.id), []);
+
   return (
     <View style={styles.container}>
       <Header title={homeStrings.flashcard} />
-      <FlatList
-        data={arrayOftest}
-        style={styles.flatlist}
-        keyExtractor={item => String(item.id)}
-        renderItem={({item}) => <CardItem cardData={item} />}
+      {flashCards.length ? (
+        <>
+          <FlatList
+            data={flashCards}
+            style={styles.flatlist}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            removeClippedSubviews
+            updateCellsBatchingPeriod={50}
+          />
+          <Button onPress={() => setModalVisibility(true)} />
+        </>
+      ) : (
+        <EmptyFlashcardMessage onPress={() => setModalVisibility(true)} />
+      )}
+
+      <CreateFlashcardModal
+        visible={modalVisibility}
+        onClose={() => setModalVisibility(false)}
+        onCreate={handleCreateFlashcard}
       />
-      <Button onPress={onHandleCreateFashcard} />
     </View>
   );
 };
@@ -68,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default React.memo(Home);

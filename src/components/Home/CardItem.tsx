@@ -3,15 +3,21 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {color} from '../../styles';
 import {scale} from '../../utils/platformUtils';
-import {CardData} from '../../screens/Home';
+import {Flashcard} from '../../database/types';
+import {homeStrings} from '../../locales';
 
 interface CardItemProps {
-  cardData: CardData;
+  cardData: Flashcard;
 }
 
-const CardItem = ({cardData}: CardItemProps) => {
+const CardItem = React.memo(({cardData}: CardItemProps) => {
+  console.log('cardData', cardData);
   return (
-    <TouchableOpacity activeOpacity={0.5} style={styles.container}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={styles.container}
+      accessibilityLabel={`Card com título ${cardData.title}`}
+      accessible>
       <View style={styles.textColumn}>
         <Text style={styles.title}>{cardData.title}</Text>
         {cardData.description && (
@@ -19,17 +25,21 @@ const CardItem = ({cardData}: CardItemProps) => {
             {cardData.description}
           </Text>
         )}
+        <Text numberOfLines={1} style={styles.description}>
+          {homeStrings.cards}
+          {cardData.cards.length}
+        </Text>
       </View>
       <View style={styles.icon}>
         <Icon
-          name={'arrow-forward-ios'}
+          name="arrow-forward-ios"
           color={color.lightGray}
           size={scale(22)}
         />
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export default CardItem;
 
@@ -40,12 +50,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingBottom: 16,
-    marginVertical: 6,
+    paddingBottom: scale(16),
+    marginVertical: scale(6),
+    backgroundColor: color.white,
   },
   title: {
     fontSize: scale(16),
-    color: color.lightBlack,
+    color: color.black,
+    fontWeight: 'bold',
   },
   description: {
     fontSize: scale(12),

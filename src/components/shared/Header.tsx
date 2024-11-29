@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   title: {
-    color: color.lightBlack,
-    fontSize: scale(16),
+    color: color.black,
+    fontSize: scale(18),
     padding: scale(4),
     fontWeight: '500',
   },

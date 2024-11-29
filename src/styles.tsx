@@ -4,13 +4,15 @@ import { scale } from './utils/platformUtils';
 export const color = {
   primaryBlue: '#42a5f6',
   backgroundGreen: '#009688',
+  warning: '#FFC107',
+  danger: '#FF5252',
   white: '#FFFFFF',
   background: '#FFFFFF',
   darkGray: '#666666',
   lightGray: '#888888',
   opacityGray: '#ddd',
-  black: '#010101',
-  lightBlack: '#242323',
+  black: '#242424',
+  lightBlack: '#363636',
 };
 
 export const isAndroid = () => Platform.OS === 'android';

@@ -12,7 +12,7 @@ interface ButtonProps {
 const Button = ({onPress}: ButtonProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      <Text style={styles.title}>{homeStrings.creatFlashcard}</Text>
+      <Text style={styles.title}>{homeStrings.createFlashcard}</Text>
       <Icon name={'add'} color={color.white} size={scale(24)} />
     </TouchableOpacity>
   );
